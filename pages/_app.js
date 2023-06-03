@@ -7,7 +7,7 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <main className='flex p-4 bg-bg-light h-screen'>
+      <main className='flex p-4 bg-bg-light h-screen gap-3'>
         <Navbar />
         <Component {...pageProps} />
       </main>

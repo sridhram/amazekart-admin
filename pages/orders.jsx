@@ -1,9 +1,12 @@
+import React from 'react'
 import Layout from '@/components/Layout'
 
-export default function Home() {
+const orders = () => {
   return (
     <Layout>
-      Home
+        Orders
     </Layout>
   )
 }
+
+export default orders
