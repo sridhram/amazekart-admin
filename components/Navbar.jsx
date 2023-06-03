@@ -10,7 +10,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   const linkClass='flex items-center px-4 py-2 text-sec-text-light hover:text-sec-bg-light hover:bg-hover-light rounded-lg group';
   const activeLinkClass='bg-hover-light text-sec-bg-light';
-  const iconClass = 'w-7 h-7 inline-block mr-2 text-icon-light';
+  const iconClass = 'w-7 h-7 inline-block mr-2 text-icon-light group-hover:text-sec-bg-light';
   const linkTxtClass='font-semibold';
   return (
     <aside className='flex flex-col gap-8 bg-sec-bg-light p-4 rounded-xl'>
