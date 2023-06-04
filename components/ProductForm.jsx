@@ -27,21 +27,24 @@ const ProductForm = ({
 
     const formSubmit = (event) => {
         event.preventDefault();
+        let method = 'POST';
+        let jsonBody = formValues;
         if(_id){
-            console.log('put request to be sent');
-        }else{
-            fetch('/api/products',{
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formValues)
-            }).then((response) => {
-                if(response.status === 204){
-                    router.push('/products');
-                }
-            })
+            method = 'PUT';
+            jsonBody = {...jsonBody,_id};
         }
+        
+        fetch('/api/products',{
+            method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jsonBody)
+        }).then((response) => {
+            if(response.status === 201 || response.status === 204 ){
+                router.push('/products');
+            }
+        })
     }
 
     const onChange = (event) => {
