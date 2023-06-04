@@ -23,10 +23,10 @@ const Products = () => {
                 <section className='flex flex-col gap-4 mt-8'>
                     {products.map((product) => {
                         return(
-                            <div key={product._id} className='flex items-center gap-2'>
+                            <Link href={`/products/${product._id}`} key={product._id} className='flex items-center gap-2 group'>
                                 <h3 className='text-xl'>{product.name}</h3>
-                                <PencilIcon className='w-5 h-5' />
-                            </div>
+                                <PencilIcon className='w-5 h-5 hidden group-hover:block' />
+                            </Link>
                         )
                     })}
                 </section>

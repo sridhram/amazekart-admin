@@ -9,8 +9,13 @@ export default async function handler(req, res) {
         const product = await Product.create(req.body)
         res.status(204).json(product)
     }else if(req.method === 'GET'){
-        const products = await Product.find();
-        res.status(200).json(products)
+        let response;
+        if(req.query?.id){
+            response = await Product.findById(req.query.id);
+        }else{
+            response = await Product.find();
+        }
+        res.status(200).json(response)
     }
 
 }
