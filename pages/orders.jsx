@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '@/components/Layout'
 
-const orders = () => {
+const Orders = () => {
   return (
     <Layout>
         Orders
@@ -9,4 +9,4 @@ const orders = () => {
   )
 }
 
-export default orders
+export default Orders

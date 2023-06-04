@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary{
+  @apply px-4 py-2 rounded-lg text-text-light bg-hover-light border border-transparent hover:text-hover-light-text hover:border-hover-light hover:bg-sec-bg-light hover:shadow-card-box-shadow
+}
+
+input, textarea{
+  @apply border border-sec-text-light py-2 px-3 rounded-lg bg-bg-light
+}
+
+input:focus, textarea:focus{
+  @apply outline-hover-light
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

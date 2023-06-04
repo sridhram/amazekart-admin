@@ -9,17 +9,17 @@ const Navbar = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const linkClass='flex items-center px-4 py-2 text-sec-text-light hover:text-sec-bg-light hover:bg-hover-light rounded-lg group';
-  const activeLinkClass='bg-hover-light text-sec-bg-light';
+  const activeLinkClass='bg-hover-light !text-sec-bg-light';
   const iconClass = 'w-7 h-7 inline-block mr-2 text-icon-light group-hover:text-sec-bg-light';
   const linkTxtClass='font-semibold';
   return (
-    <aside className='flex flex-col gap-8 bg-sec-bg-light p-4 rounded-xl'>
+    <aside className='flex flex-col gap-8 bg-sec-bg-light p-4 rounded-xl shadow-box-shadow'>
       <Link href='/' className='flex'>
         <ShoppingCartIcon className={`${iconClass}`} />
         <span className='font-bold text-xl'>Amazekart</span>
       </Link>
       <nav className='flex flex-col gap-4'>
-        <Link className={`${linkClass} ${router.pathname == '/' && activeLinkClass}`} href='/'>
+        <Link className={`${router.pathname == '/' && activeLinkClass} ${linkClass}`} href='/'>
           {router.pathname == '/' ? <HomeIconSolid className={`${iconClass} text-sec-bg-light`} /> : <HomeIcon className={`${iconClass}`} /> }
           <span className={`${linkTxtClass}`} >Dashboard</span>
         </Link>

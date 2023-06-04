@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '@/components/Layout'
 
-const settings = () => {
+const Settings = () => {
   return (
     <Layout>
         Settings
@@ -9,4 +9,4 @@ const settings = () => {
   )
 }
 
-export default settings
+export default Settings
