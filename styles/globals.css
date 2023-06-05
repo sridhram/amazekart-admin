@@ -6,6 +6,13 @@
   @apply px-4 py-2 rounded-lg text-text-light bg-hover-light border border-transparent hover:text-hover-light-text hover:border-hover-light hover:bg-sec-bg-light hover:shadow-card-box-shadow
 }
 
+.btn-primary-green {
+  @apply px-4 py-2 rounded-lg text-text-light bg-green-600 border border-transparent hover:text-hover-light-text hover:border-green-600 hover:bg-sec-bg-light hover:shadow-card-box-shadow
+}
+.btn-primary-red {
+  @apply px-4 py-2 rounded-lg text-text-light bg-red-600 border border-transparent hover:text-hover-light-text hover:border-red-600 hover:bg-sec-bg-light hover:shadow-card-box-shadow
+}
+
 input, textarea{
   @apply border border-sec-text-light py-2 px-3 rounded-lg bg-bg-light
 }

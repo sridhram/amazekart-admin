@@ -9,7 +9,6 @@ export default async function handler(req, res) {
         await Product.create(req.body)
         res.status(201).send('OK');
     }else if(req.method === 'PUT'){
-        console.log(req.body);
         await Product.findByIdAndUpdate(req.body._id,{
             name:req.body.name,
             description:req.body.description,
@@ -18,6 +17,13 @@ export default async function handler(req, res) {
             res.status(204).send('OK');
         }).catch(err => console.log(err));
         
+    }else if(req.method === 'DELETE'){
+        console.log(req.query.id);
+        if(req.query?.id){
+            Product.findByIdAndDelete(req.query.id).then(() => {
+                res.status(204).send('OK');
+            }).catch(err => console.log(err));
+        }
     }else{
         let response;
         if(req.query?.id){
