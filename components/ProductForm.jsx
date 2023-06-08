@@ -32,18 +32,21 @@ const ProductForm = ({
     const formSubmit = (event) => {
         event.preventDefault();
         let method = 'POST';
-        let jsonBody = formValues;
+        let formData = new FormData();
+        for(let key in formValues){
+            formData.append(key, formValues[key]);
+        }
         if(_id){
             method = 'PUT';
-            jsonBody = {...jsonBody,_id};
+            formData.append('_id',_id);
         }
         
         fetch('/api/products',{
             method,
-            headers: {
-                "Content-Type": "application/json",
+            headers:{
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(jsonBody)
+            body: formValues
         }).then((response) => {
             if(response.status === 201 || response.status === 204 ){
                 router.push('/products');
@@ -60,16 +63,17 @@ const ProductForm = ({
     }
 
     const uploadImage = (event) => {
-        const imageReader = new FileReader();
-        imageReader.onload = () => {
-            if(imageReader.readyState === 2){
-                setFormvalues({
-                    ...formValues,
-                    imagesList : [imageReader.result, ...formValues.imagesList]
-                })
-            }
-        }
-        imageReader.readAsDataURL(event.target.files[0]);
+        // const imageReader = new FileReader();
+        // imageReader.onload = () => {
+        //     if(imageReader.readyState === 2){
+                
+        //     }
+        // }
+        setFormvalues({
+            ...formValues,
+            imagesList : [event.target.files[0], ...formValues.imagesList]
+        })
+        // imageReader.readAsDataURL(event.target.files[0]);
 
     }
 
@@ -83,7 +87,7 @@ const ProductForm = ({
             <FormInput name="name" value={formValues.name} onChange={onChange} placeholder="Product Name" />
             <section className='flex gap-4 flex-wrap'>
                 <label className="px-6 py-12 flex gap-1 items-center w-fit rounded-lg bg-sec-text-light/20 cursor-pointer">
-                    <input type="file" className='hidden' onChange={uploadImage} accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" />
+                    <input type="file" className='hidden' onChange={uploadImage} multiple="multiple" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" />
                     <ArrowUpTrayIcon className='w-5 h-5' />
                     Upload
                 </label>

@@ -1,43 +1,34 @@
 import { mongooseConnect } from "@/lib/mongooseconnect";
 import { Product } from "@/models/Product";
-import multer from "multer";
+import IncomingForm from "formidable-serverless";
 
-
-export const config = {
-    api: {
-        bodyParser: {
-            sizeLimit: '4mb' // Set desired value here
-        }
-    }
-}
 export default async function handler(req, res) {
     
     await mongooseConnect();
-    const storage = multer.diskStorage({
-            destination: function(req, file, cb){
-                console.log('*************destination*********************');
-                cb(null, "public/uploads")
-            },
-            filename: function(req, file, cb){
-                console.log('*********************filename*********************');
-                cb(null, `${new Date().toISOString()}_${file.originalname}`)
-            }
-        })
-        const fileFilter = (req, file, cb) => {
-            console.log('*********************filefilter*********************');
-            if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/tiff' || file.mimetype === 'image/gif' || file.mimetype === 'image/svg'){
-                cb(null, true);
-            }else{
-                cb({'error' : 'Unsupported file format only JPG/JPEG, PNG, TIFF, SVG or GIF supported'},false)
-            }
-        }
-        const upload = multer({
-            storage: storage,
-            fileFilter
-        });
-
+    const form = new IncomingForm();
+    console.log(form);
+    form.on('fileBegin', function(name, file) {
+        console.log(name);
+        console.log('*****************inside filebeginning call********************');
+        console.log(file);
+    });
+    form.on('file', function(name, file) {
+        console.log('*******************inside file call******************');
+        console.log(name);
+        console.log('*************************************');
+        console.log(file);
+    });
     if(req.method === 'POST'){
-        upload.single(req.body.imagesList[0]);
+        form.parse(req, (err, fields, files) => {
+            console.log(files)
+            console.log('***************in parse method**********************');
+            if(err){
+                console.log('******************error********************');
+                console.log(err);
+                console.log('*************************************');
+            }
+            return;
+        });
         await Product.create(req.body)
         res.status(201).send('OK');
     }else if(req.method === 'PUT'){
@@ -67,3 +58,8 @@ export default async function handler(req, res) {
     }
 
 }
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
